@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sensible Heat Gain Estimation</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- <link rel="stylesheet" href="/local/bootstrap.min.css" /> -->
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      input {
+        min-width: 75px !important;
+      }
+
+      sub {
+        font-size: x-small;
+      }
+
+      .min-h-100 {
+        min-height: 100vh;
+      }
+
+      .floating-blk {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+      }
+
+      .floating-blk .btn {
+        font-size: 1rem !important;
+      }
+
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background-color: rgb(228, 228, 228);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: rgb(151, 151, 151);
+      }
+    </style>
+  </head>
+
+  <body oncontextmenu="return false;">
+    <header>
+      <!-- place navbar here -->
+    </header>
+    <main>
+      <div class="container-fluid my-5">
+        <div
+          class="row flex-col justify-content-center align-items-center gap-4 text-center"
+          style="min-height: 80vh"
+        >
+          <div class="my-5">
+            <p class="text-muted py-0 my-0">AC required for room</p>
+            <h1
+              class="my-0 py-0 fw-bolder"
+              style="font-size: 10rem; line-height: 0.75em !important"
+              id="requiredConditioningCountDisplay"
+            >
+              97
+            </h1>
+          </div>
+
+          <div class="my-5" style="max-width: 700px">
+            <div class="table-responsive-sm">
+              <table
+                class="table table-stripede table-hover table-bordered text-start align-middle"
+              >
+                <tbody class="table-group-dividerd">
+                  <tr class="">
+                    <td>
+                      AC Rating:
+                      <br />
+                      <span id="ACHPRatingDisplay">1.5 </span>
+                      HP
+                    </td>
+                    <td>
+                      Group:
+                      <br />
+                      1
+                    </td>
+                  </tr>
+                  <tr class="">
+                    <td>
+                      Room:
+                      <br />
+                      MEGA Hall
+                    </td>
+                    <td>
+                      Dimension (m):
+                      <br />
+                      <span id="dimensionDisplay"> 30 x 40 x 7 </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="">
+            <a
+              name=""
+              id=""
+              class="btn btn-outline-secondary px-5"
+              href="#calculationTables"
+              role="button"
+            >
+              Tables
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid py-5" id="calculationTables">
+        <div
+          class="row min-h-100 d-flex justify-content-center align-items-center py-5"
+        >
+          <div class="col-lg-8 col-xl-7 mx-auto">
+            <div class="table-responsive">
+              <table
+                class="table table-striped table-hover table-bordered align-middle"
+              >
+                <thead class="table-light">
+                  <caption class="small">
+                    Estimation of sensible heat gain.
+                    <br />
+                    Assignment for Cooling & Load Estimation
+                    <b>(Group 1)</b>
+                  </caption>
+                  <tr>
+                    <th>Source</th>
+                    <th>(U)</th>
+                    <th>
+                      A
+                    </th>
+                    <th>(t<sub>e</sub>) <sup>o</sup>C</th>
+                    <th>W = U.A.t<sub>e</sub></th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <!-- NORTH WALL ROW -->
+                  <tr class="">
+                    <td scope="row">North Wall</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="heatCoefficientNorthWall"
+                        id="heatCoefficientNorthWall"
+                        step="0.01"
+                        value="2.5"
+                      />
+                    </td>
+                    <td id="northWallAreaTotal">0</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="eqTemperatureDifferenceNorthWall"
+                        id="eqTemperatureDifferenceNorthWall"
+                        step="0.1"
+                        value="12"
+                      />
+                    </td>
+                    <td id="northWallSensibleHeat">0</td>
+                  </tr>
+
+                  <!-- SOUTH WALL ROW -->
+                  <tr class="">
+                    <td scope="row">South Wall</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="heatCoefficientSouthWall"
+                        id="heatCoefficientSouthWall"
+                        step="0.01"
+                        value="2.5"
+                      />
+                    </td>
+                    <td id="southWallAreaTotal">0</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="eqTemperatureDifferenceSouthWall"
+                        id="eqTemperatureDifferenceSouthWall"
+                        step="0.1"
+                        value="15"
+                      />
+                    </td>
+                    <td id="southWallSensibleHeat">0</td>
+                  </tr>
+
+                  <!-- EAST WALL ROW -->
+                  <tr class="">
+                    <td scope="row">East Wall</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="heatCoefficientNorthWall"
+                        id="heatCoefficientEastWall"
+                        step="0.01"
+                        value="2.5"
+                      />
+                    </td>
+                    <td id="eastWallAreaTotal">0</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="eqTemperatureDifferenceEastWall"
+                        id="eqTemperatureDifferenceEastWall"
+                        step="0.1"
+                        value="12"
+                      />
+                    </td>
+                    <td id="eastWallSensibleHeat">0</td>
+                  </tr>
+
+                  <!-- WEST WALL ROW -->
+                  <tr class="">
+                    <td scope="row">West Wall</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="heatCoefficientWestWall"
+                        id="heatCoefficientWestWall"
+                        step="0.01"
+                        value="2.5"
+                      />
+                    </td>
+                    <td id="westWallAreaTotal">0</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="eqTemperatureDifferenceWestWall"
+                        id="eqTemperatureDifferenceWestWall"
+                        step="0.1"
+                        value="17"
+                      />
+                    </td>
+                    <td id="westWallSensibleHeat">0</td>
+                  </tr>
+
+                  <!-- ROOF ROW -->
+                  <tr class="">
+                    <td scope="row">Roof</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="heatCoefficientRoof"
+                        id="heatCoefficientRoof"
+                        step="0.01"
+                        value="2"
+                      />
+                    </td>
+                    <td id="roofAreaTotal">0</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="eqTemperatureDifferenceRoof"
+                        id="eqTemperatureDifferenceRoof"
+                        step="0.1"
+                        value="20"
+                      />
+                    </td>
+                    <td id="roofSensibleHeat">0</td>
+                  </tr>
+
+                  <!-- FLOOR ROW -->
+                  <tr class="">
+                    <td scope="row">Floor</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="heatCoefficientFloor"
+                        id="heatCoefficientFloor"
+                        step="0.01"
+                        value="3"
+                      />
+                    </td>
+                    <td id="floorAreaTotal">0</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="eqTemperatureDifferenceFloor"
+                        id="eqTemperatureDifferenceFloor"
+                        step="0.1"
+                        value="2.5"
+                      />
+                    </td>
+                    <td id="floorSensibleHeat">0</td>
+                  </tr>
+
+                  <!-- NORTH DOORS -->
+                  <tr class="">
+                    <td scope="row">North Doors</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="heatCoefficientNorthDoors"
+                        id="heatCoefficientNorthDoors"
+                        step="0.01"
+                        value="1.5"
+                      />
+                    </td>
+                    <td id="northDoorsAreaTotal">0</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="eqTemperatureDifferenceNorthDoors"
+                        id="eqTemperatureDifferenceNorthDoors"
+                        step="0.1"
+                        value="12"
+                      />
+                    </td>
+                    <td id="northDoorsSensibleHeat">0</td>
+                  </tr>
+
+                  <!-- SOUTH DOORS -->
+                  <tr class="">
+                    <td scope="row">South Doors</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="heatCoefficientSouthDoors"
+                        id="heatCoefficientSouthDoors"
+                        step="0.01"
+                        value="0"
+                      />
+                    </td>
+                    <td id="southDoorsAreaTotal">0</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="eqTemperatureDifferenceSouthDoors"
+                        id="eqTemperatureDifferenceSouthDoors"
+                        step="0.1"
+                        value="0"
+                      />
+                    </td>
+                    <td id="southDoorsSensibleHeat">0</td>
+                  </tr>
+
+                  <!-- EAST DOORS -->
+                  <tr class="">
+                    <td scope="row">East Doors</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="heatCoefficientEastDoors"
+                        id="heatCoefficientEastDoors"
+                        step="0.01"
+                        value="0"
+                      />
+                    </td>
+                    <td id="eastDoorsAreaTotal">0</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="eqTemperatureDifferenceEastDoors"
+                        id="eqTemperatureDifferenceEastDoors"
+                        step="0.1"
+                        value="0"
+                      />
+                    </td>
+                    <td id="eastDoorsSensibleHeat">0</td>
+                  </tr>
+
+                  <!-- WEST DOORS -->
+                  <tr class="">
+                    <td scope="row">West Doors</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="heatCoefficientWestDoors"
+                        id="heatCoefficientWestDoors"
+                        step="0.01"
+                        value="1.5"
+                      />
+                    </td>
+                    <td id="westDoorsAreaTotal">0</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="eqTemperatureDifferenceWestDoors"
+                        id="eqTemperatureDifferenceWestDoors"
+                        step="0.1"
+                        value="12"
+                      />
+                    </td>
+                    <td id="westDoorsSensibleHeat">0</td>
+                  </tr>
+
+                  <!-- NORTH WINDOWS -->
+                  <tr class="">
+                    <td scope="row">North Windows</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="heatCoefficientNorthWindows"
+                        id="heatCoefficientNorthWindows"
+                        step="0.01"
+                        value="6"
+                      />
+                    </td>
+                    <td id="northWindowsAreaTotal">0</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="eqTemperatureDifferenceNorthWindows"
+                        id="eqTemperatureDifferenceNorthWindows"
+                        step="0.1"
+                        value="18"
+                      />
+                    </td>
+                    <td id="northWindowsSensibleHeat">0</td>
+                  </tr>
+
+                  <!-- SOUTH WINDOWS -->
+                  <tr class="">
+                    <td scope="row">South Windows</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="heatCoefficientSouthWindows"
+                        id="heatCoefficientSouthWindows"
+                        step="0.01"
+                        value="6"
+                      />
+                    </td>
+                    <td id="southWindowsAreaTotal">0</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="eqTemperatureDifferenceSouthWindows"
+                        id="eqTemperatureDifferenceSouthWindows"
+                        step="0.1"
+                        value="18"
+                      />
+                    </td>
+                    <td id="southWindowsSensibleHeat">0</td>
+                  </tr>
+
+                  <!-- EAST WINDOWS -->
+                  <tr class="">
+                    <td scope="row">East Windows</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="heatCoefficientEastWindows"
+                        id="heatCoefficientEastWindows"
+                        step="0.01"
+                        value="6"
+                      />
+                    </td>
+                    <td id="eastWindowsAreaTotal">0</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="eqTemperatureDifferenceEastWindows"
+                        id="eqTemperatureDifferenceEastWindows"
+                        step="0.1"
+                        value="18"
+                      />
+                    </td>
+                    <td id="eastWindowsSensibleHeat">0</td>
+                  </tr>
+
+                  <!-- WEST WINDOWS -->
+                  <tr class="">
+                    <td scope="row">West Windows</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="heatCoefficientWestWindows"
+                        id="heatCoefficientWestWindows"
+                        step="0.01"
+                        value="6"
+                      />
+                    </td>
+                    <td id="westWindowsAreaTotal">0</td>
+                    <td>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        name="eqTemperatureDifferenceWestWindows"
+                        id="eqTemperatureDifferenceWestWindows"
+                        step="0.1"
+                        value="18"
+                      />
+                    </td>
+                    <td id="westWindowsSensibleHeat">0</td>
+                  </tr>
+
+                  <!-- TOTAL TOTAL -->
+                  <tr class="">
+                    <td colspan="4" class="text-center" scope="row">
+                      Total ==>
+                    </td>
+                    <td>
+                      <b><span id="totalOfTotalSensibleHeatGain"></span> W</b>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="col-lg-8 col-xl-7 mx-auto my-5">
+            <div class="table-responsive">
+              <table
+                class="table table-striped table-hover table-bordered align-middle"
+              >
+                <thead class="table-light">
+                  <caption class="small">
+                    Estimating sensible heat gain of glass windows.
+                  </caption>
+                  <tr>
+                    <th></th>
+                    <th>North</th>
+                    <th>South</th>
+                    <th>East</th>
+                    <th>West</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <!-- NORTH SOLAR HG -->
+                  <tr class="">
+                    <td scope="row">Glass Solar Heat Gain (W)</td>
+                    <td id="solarHeatGainNorthGlassWindow">0</td>
+                    <td id="solarHeatGainSouthGlassWindow">0</td>
+                    <td id="solarHeatGainEastGlassWindow">0</td>
+                    <td id="solarHeatGainWestGlassWindow">0</td>
+                    <td id="totalSolarHeatGain">0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="col-lg-8 col-xl-7 mx-auto my-5">
+            <div class="table-responsive">
+              <table
+                class="table table-striped table-hover table-bordered align-middle"
+              >
+                <thead class="table-light">
+                  <caption class="small">
+                    Estimation of sensible heat gain.
+                  </caption>
+                  <tr>
+                    <th>S.H.G due to;</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <!-- NORTH SOLAR HG -->
+                  <tr class="">
+                    <td scope="row">Infiltrated Air</td>
+                    <td id="sensibleHeatGainDueToInfiltratedAir">0</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">Lighting</td>
+                    <td id="sensibleHeatGainDueToLighting">0</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">Occupants</td>
+                    <td id="sensibleHeatGainDueToOccupants">0</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">Outside Air</td>
+                    <td id="sensibleHeatGainDueToOutsideAir">0</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">Equipments</td>
+                    <td id="sensibleHeatGainDueToEquipments">0</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">
+                      <b>Total</b>
+                    </td>
+                    <td id="totalSensibleHeatGainDue">0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="col-lg-8 col-xl-7 mx-auto my-5">
+            <div class="table-responsive">
+              <table
+                class="table table-striped table-hover table-bordered align-middle"
+              >
+                <thead class="table-light">
+                  <caption class="small">
+                    Estimation of latent heat gain.
+                  </caption>
+                  <tr>
+                    <th>L.H.G due to;</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr class="">
+                    <td scope="row">Infiltrated Air</td>
+                    <td id="latentHeatGainDueToInfiltratedAir">0</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">Outside Air</td>
+                    <td id="latentHeatGainDueToOutsideAir">0</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">Occupants</td>
+                    <td id="latentHeatGainDueToOccupants">0</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">Equipments</td>
+                    <td id="latentHeatGainDueToEquipments">0</td>
+                  </tr>
+                  <tr class="">
+                    <td scope="row">
+                      <b>Total</b>
+                    </td>
+                    <td id="totalLatentHeatGainDue">0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FLOATING BUTTON -->
+    <div class="floating-blk p-3 p-sm-5">
+      <div class="row">
+        <div class="col-3">
+          <button
+            type="button"
+            class="btn btn-lg p-2 p-md-3 p-lg-4 btn-primary rounded-circle"
+            data-bs-toggle="modal"
+            data-toggle="modal"
+            data-bs-target="#measurementsValuesModal"
+            data-target="#measurementsValuesModal"
+          >
+            Set <br />
+            Values
+          </button>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <!-- place footer here -->
+    </footer>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="measurementsValuesModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="measurementsValuesModalTitle"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-md-down"
+        role="document"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="measurementsValuesModalTitle">
+              <!-- Measurements & Values -->
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body overflow-y-scroll" style="min-height: 300px">
+            <div class="">
+              <table
+                class="table table-striped table-hover table-bordered align-middle"
+              >
+                <thead class="table-light"></thead>
+                <tbody class="">
+                  <tr class="" id="roomValues">
+                    <td scope="row">
+                      <h6 class="h6">Room Measurements (m)</h6>
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="mb-3">
+                            <label
+                              for="roomLength"
+                              class="form-label small mb-0"
+                              >Room Length</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="roomLength"
+                              step="0.01"
+                              min="0"
+                              id="roomLength"
+                              aria-describedby=""
+                              placeholder="Length"
+                              value="30"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="mb-3">
+                            <label for="roomWidth" class="form-label small mb-0"
+                              >Room Width</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="roomWidth"
+                              step="0.01"
+                              min="0"
+                              id="roomWidth"
+                              aria-describedby=""
+                              placeholder="Width"
+                              value="20"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="mb-3">
+                            <label
+                              for="roomHeight"
+                              class="form-label small mb-0"
+                              >Room Height</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="roomHeight"
+                              step="0.01"
+                              min="0"
+                              id="roomHeight"
+                              aria-describedby=""
+                              placeholder="Height"
+                              value="4"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="mb-3">
+                            <label
+                              for="roomRating"
+                              class="form-label small mb-0"
+                              >AC Rating</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="roomRating"
+                              step="0.1"
+                              min="0"
+                              max="3"
+                              id="roomRating"
+                              aria-describedby=""
+                              placeholder="Height"
+                              value="1.5"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="" id="doorValues">
+                    <td scope="row">
+                      <h6 class="h6">Door Measurements (m)</h6>
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="mb-3">
+                            <label
+                              for="doorLength"
+                              class="form-label small mb-0"
+                              >Door Length</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="doorLength"
+                              step="0.01"
+                              min="0"
+                              id="doorLength"
+                              aria-describedby=""
+                              placeholder="Length"
+                              value="2.5"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="mb-3">
+                            <label for="doorWidth" class="form-label small mb-0"
+                              >Door Width</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="doorWidth"
+                              step="0.01"
+                              min="0"
+                              id="doorWidth"
+                              aria-describedby=""
+                              placeholder="Width"
+                              value="3"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="mb-3">
+                            <label
+                              for="doorLengthSmall"
+                              class="form-label small mb-0"
+                              >Small Door Length</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="doorLengthSmall"
+                              step="0.01"
+                              min="0"
+                              id="doorLengthSmall"
+                              aria-describedby=""
+                              placeholder="Length"
+                              value="2.5"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="mb-3">
+                            <label for="doorWidthBig" class="form-label small mb-0"
+                              >Small Door Width</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="doorWidthBig"
+                              step="0.01"
+                              min="0"
+                              id="doorWidthBig"
+                              aria-describedby=""
+                              placeholder="Width"
+                              value="3"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="" id="doorsCount">
+                    <td scope="row">
+                      <h6 class="h6">No. of Doors</h6>
+                      <div class="row">
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="doorsCountNorth"
+                            class="form-label small mb-0 pe-2 text-truncate"
+                          >
+                            North doors
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="doorsCountNorth"
+                            step="1"
+                            min="0"
+                            id="doorsCountNorth"
+                            placeholder="N"
+                            value="2"
+                          />
+                        </div>
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="doorsCountSouth"
+                            class="form-label small mb-0 pe-2 text-truncate"
+                          >
+                            South doors
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="doorsCountSouth"
+                            step="1"
+                            min="0"
+                            id="doorsCountSouth"
+                            placeholder="S"
+                            value="0"
+                          />
+                        </div>
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="doorsCountEast"
+                            class="form-label small mb-0 pe-2 text-truncate"
+                          >
+                            East doors
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="doorsCountEast"
+                            step="1"
+                            min="0"
+                            id="doorsCountEast"
+                            placeholder="E"
+                            value="0"
+                          />
+                        </div>
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="doorsCountWest"
+                            class="form-label small mb-0 pe-2 text-truncate"
+                          >
+                            West doors
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="doorsCountWest"
+                            step="1"
+                            min="0"
+                            id="doorsCountWest"
+                            placeholder="W"
+                            value="0"
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="" id="windowsValues">
+                    <td scope="row">
+                      <h6 class="h6">Windows Measurements (m)</h6>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="mb-3">
+                            <label
+                              for="windowsLength"
+                              class="form-label small mb-0"
+                              >Windows Length</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="windowsLength"
+                              step="0.01"
+                              min="0"
+                              id="windowsLength"
+                              aria-describedby=""
+                              placeholder="Length"
+                              value="2"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="mb-3">
+                            <label
+                              for="windowsWidth"
+                              class="form-label small mb-0"
+                              >Windows Width</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="windowsWidth"
+                              step="0.01"
+                              min="0"
+                              id="windowsWidth"
+                              aria-describedby=""
+                              placeholder="Width"
+                              value="1.5"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="" id="windowsCount">
+                    <td scope="row">
+                      <h6 class="h6">No. of Windows</h6>
+                      <div class="row">
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="windowsCountNorth"
+                            class="form-label small mb-0"
+                          >
+                            North Windows
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="windowsCountNorth"
+                            step="1"
+                            min="0"
+                            id="windowsCountNorth"
+                            placeholder="N"
+                            value="0"
+                          />
+                        </div>
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="windowsCountSouth"
+                            class="form-label small mb-0"
+                          >
+                            South Windows
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="windowsCountSouth"
+                            step="1"
+                            min="0"
+                            id="windowsCountSouth"
+                            placeholder="S"
+                            value="4"
+                          />
+                        </div>
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="windowsCountEast"
+                            class="form-label small mb-0"
+                          >
+                            East Windows
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="windowsCountEast"
+                            step="1"
+                            min="0"
+                            id="windowsCountEast"
+                            placeholder="E"
+                            value="4"
+                          />
+                        </div>
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="windowsCountWest"
+                            class="form-label small mb-0"
+                          >
+                            West Windows
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="windowsCountWest"
+                            step="1"
+                            min="0"
+                            id="windowsCountWest"
+                            placeholder="W"
+                            value="4"
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="" id="">
+                    <td scope="row">
+                      <h6 class="h6">SHGF Glass Windows</h6>
+                      <div class="row">
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="windowsSHGFNorth"
+                            class="form-label small mb-0"
+                          >
+                            North Windows
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="windowsSHGFNorth"
+                            step="0.01"
+                            min="0"
+                            id="windowsSHGFNorth"
+                            placeholder="N"
+                            value="128"
+                          />
+                        </div>
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="windowsSHGFSouth"
+                            class="form-label small mb-0"
+                          >
+                            South Windows
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="windowsSHGFSouth"
+                            step="0.01"
+                            min="0"
+                            id="windowsSHGFSouth"
+                            placeholder="S"
+                            value="106"
+                          />
+                        </div>
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="windowsSHGFEast"
+                            class="form-label small mb-0"
+                          >
+                            East Windows
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="windowsSHGFEast"
+                            step="0.01"
+                            min="0"
+                            id="windowsSHGFEast"
+                            placeholder="E"
+                            value="0"
+                          />
+                        </div>
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="windowsSHGFWest"
+                            class="form-label small mb-0"
+                          >
+                            West Windows
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="windowsSHGFWest"
+                            step="0.01"
+                            min="0"
+                            id="windowsSHGFWest"
+                            placeholder="W"
+                            value="0"
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- OCCUPANTS -->
+                  <tr class="" id="">
+                    <td scope="row">
+                      <h6 class="h6">Occupants</h6>
+                      <div class="row">
+                        <div class="col-6 col-md-4 mb-3">
+                          <label
+                            for="occupantsCount"
+                            class="form-label small mb-0"
+                          >
+                            Count
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="occupantsCount"
+                            step="1"
+                            min="0"
+                            id="occupantsCount"
+                            placeholder="N"
+                            value="128"
+                          />
+                        </div>
+                        <div class="col-6 col-md-4 mb-3">
+                          <label
+                            for="occupantSHG"
+                            class="form-label small mb-0"
+                          >
+                            SHG per count
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="occupantSHG"
+                            step="0.01"
+                            min="0"
+                            id="occupantSHG"
+                            placeholder="S"
+                            value="0"
+                          />
+                        </div>
+                        <div class="col-6 col-md-4 mb-3">
+                          <label
+                            for="occupantSHG"
+                            class="form-label small mb-0"
+                          >
+                            LHG per count
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="occupantLHG"
+                            step="0.01"
+                            min="0"
+                            id="occupantLHG"
+                            placeholder="0"
+                            value="0"
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- LIGHTING -->
+                  <tr class="" id="">
+                    <td scope="row">
+                      <h6 class="h6">Lighting</h6>
+                      <div class="row">
+                        <div class="col-6 col-md-4 mb-3">
+                          <label
+                            for="lightingCount"
+                            class="form-label small mb-0"
+                          >
+                            Count
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="lightingCount"
+                            step="0.01"
+                            min="0"
+                            id="lightingCount"
+                            placeholder="N"
+                            value="128"
+                          />
+                        </div>
+                        <div class="col-6 col-md-4 mb-3">
+                          <label
+                            for="lightingUseFactor"
+                            class="form-label small mb-0"
+                          >
+                            Use Factor
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="lightingUseFactor"
+                            step="0.01"
+                            min="0"
+                            id="lightingUseFactor"
+                            placeholder="S"
+                            value="106"
+                          />
+                        </div>
+                        <div class="col-6 col-md-4 mb-3">
+                          <label
+                            for="lightingAllowanceFactor"
+                            class="form-label small mb-0"
+                          >
+                            Allowance Factor
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="lightingAllowanceFactor"
+                            step="0.01"
+                            min="0"
+                            id="lightingAllowanceFactor"
+                            placeholder="S"
+                            value="106"
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- INFILTRATED AIR -->
+                  <tr class="" id="">
+                    <td scope="row">
+                      <h6 class="h6">Infiltration Air</h6>
+                      <div class="row">
+                        <div class="col-6 col-md-3 mb-3">
+                          <label for="CLTD1" class="form-label small mb-0">
+                            CLTD 1
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="CLTD1"
+                            step="0.01"
+                            min="0"
+                            id="CLTD1"
+                            placeholder="S"
+                            value="106"
+                          />
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                          <label for="CLTD2" class="form-label small mb-0">
+                            CLTD 2
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="CLTD2"
+                            step="0.01"
+                            min="0"
+                            id="CLTD2"
+                            placeholder="S"
+                            value="106"
+                          />
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                          <label
+                            for="infiltratedAirW1"
+                            class="form-label small mb-0"
+                          >
+                            W <sub>1</sub>
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="infiltratedAirW1"
+                            step="0.01"
+                            min="0"
+                            id="infiltratedAirW1"
+                            placeholder="S"
+                            value="106"
+                          />
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                          <label
+                            for="infiltratedAirW2"
+                            class="form-label small mb-0"
+                          >
+                            W <sub>2</sub>
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="infiltratedAirW2"
+                            step="0.01"
+                            min="0"
+                            id="infiltratedAirW2"
+                            placeholder="S"
+                            value="106"
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot></tfoot>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Set
+            </button>
+            <!-- <button type="button" class="btn btn-primary">Save</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script src="/local/jquery.min.js"></script>
+    <script src="/local/popper.min.js"></script>
+    <script src="/local/bootstrap.min.js"></script> -->
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+      integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
