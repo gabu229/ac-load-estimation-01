@@ -589,7 +589,7 @@
                   </caption>
                   <tr>
                     <th>S.H.G due to;</th>
-                    <th>Value</th>
+                    <th>Value (KW)</th>
                   </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -636,7 +636,7 @@
                   </caption>
                   <tr>
                     <th>L.H.G due to;</th>
-                    <th>Value</th>
+                    <th>Value (KW)</th>
                   </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -676,7 +676,7 @@
         <div class="col-3">
           <button
             type="button"
-            class="btn btn-lg p-2 p-md-3 p-lg-4 btn-primary rounded-circle"
+            class="btn btn-lg p-2 p-md-3 p-lg-4 btn-secondary rounded-circle"
             data-bs-toggle="modal"
             data-toggle="modal"
             data-bs-target="#measurementsValuesModal"
@@ -807,6 +807,27 @@
                             />
                           </div>
                         </div>
+                        <div class="col-md-3">
+                          <div class="mb-3">
+                            <label
+                              for="vPerPerson"
+                              class="form-label small mb-0"
+                              >Ventilation per person</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="vPerPerson"
+                              step="0.1"
+                              min="0"
+                              max="3"
+                              id="vPerPerson"
+                              aria-describedby=""
+                              placeholder="Height"
+                              value="1.5"
+                            />
+                          </div>
+                        </div>
                       </div>
                     </td>
                   </tr>
@@ -817,17 +838,17 @@
                         <div class="col-md-3">
                           <div class="mb-3">
                             <label
-                              for="doorLength"
+                              for="doorLengthBig"
                               class="form-label small mb-0"
-                              >Door Length</label
+                              >Big Door Length </label
                             >
                             <input
                               type="number"
                               class="form-control"
-                              name="doorLength"
+                              name="doorLengthBig"
                               step="0.01"
                               min="0"
-                              id="doorLength"
+                              id="doorLengthBig"
                               aria-describedby=""
                               placeholder="Length"
                               value="2.5"
@@ -836,16 +857,16 @@
                         </div>
                         <div class="col-md-3">
                           <div class="mb-3">
-                            <label for="doorWidth" class="form-label small mb-0"
-                              >Door Width</label
+                            <label for="doorWidthBig" class="form-label small mb-0"
+                              >Big Door Width </label
                             >
                             <input
                               type="number"
                               class="form-control"
-                              name="doorWidth"
+                              name="doorWidthBig"
                               step="0.01"
                               min="0"
-                              id="doorWidth"
+                              id="doorWidthBig"
                               aria-describedby=""
                               placeholder="Width"
                               value="3"
@@ -874,16 +895,16 @@
                         </div>
                         <div class="col-md-3">
                           <div class="mb-3">
-                            <label for="doorWidthBig" class="form-label small mb-0"
+                            <label for="doorWidthSmall" class="form-label small mb-0"
                               >Small Door Width</label
                             >
                             <input
                               type="number"
                               class="form-control"
-                              name="doorWidthBig"
+                              name="doorWidthSmall"
                               step="0.01"
                               min="0"
-                              id="doorWidthBig"
+                              id="doorWidthSmall"
                               aria-describedby=""
                               placeholder="Width"
                               value="3"
@@ -893,13 +914,13 @@
                       </div>
                     </td>
                   </tr>
-                  <tr class="" id="doorsCount">
+                  <tr class="" id="doorsCountBig">
                     <td scope="row">
-                      <h6 class="h6">No. of Doors</h6>
+                      <h6 class="h6">No. of Big Doors</h6>
                       <div class="row">
                         <div class="col-6 col-sm-3 mb-3">
                           <label
-                            for="doorsCountNorth"
+                            for="doorsCountNorthBig"
                             class="form-label small mb-0 pe-2 text-truncate"
                           >
                             North doors
@@ -907,17 +928,17 @@
                           <input
                             type="number"
                             class="form-control"
-                            name="doorsCountNorth"
+                            name="doorsCountNorthBig"
                             step="1"
                             min="0"
-                            id="doorsCountNorth"
+                            id="doorsCountNorthBig"
                             placeholder="N"
                             value="2"
                           />
                         </div>
                         <div class="col-6 col-sm-3 mb-3">
                           <label
-                            for="doorsCountSouth"
+                            for="doorsCountSouthBig"
                             class="form-label small mb-0 pe-2 text-truncate"
                           >
                             South doors
@@ -925,17 +946,17 @@
                           <input
                             type="number"
                             class="form-control"
-                            name="doorsCountSouth"
+                            name="doorsCountSouthBig"
                             step="1"
                             min="0"
-                            id="doorsCountSouth"
+                            id="doorsCountSouthBig"
                             placeholder="S"
                             value="0"
                           />
                         </div>
                         <div class="col-6 col-sm-3 mb-3">
                           <label
-                            for="doorsCountEast"
+                            for="doorsCountEastBig"
                             class="form-label small mb-0 pe-2 text-truncate"
                           >
                             East doors
@@ -943,17 +964,17 @@
                           <input
                             type="number"
                             class="form-control"
-                            name="doorsCountEast"
+                            name="doorsCountEastBig"
                             step="1"
                             min="0"
-                            id="doorsCountEast"
+                            id="doorsCountEastBig"
                             placeholder="E"
                             value="0"
                           />
                         </div>
                         <div class="col-6 col-sm-3 mb-3">
                           <label
-                            for="doorsCountWest"
+                            for="doorsCountWestBig"
                             class="form-label small mb-0 pe-2 text-truncate"
                           >
                             West doors
@@ -961,10 +982,89 @@
                           <input
                             type="number"
                             class="form-control"
-                            name="doorsCountWest"
+                            name="doorsCountWestBig"
                             step="1"
                             min="0"
-                            id="doorsCountWest"
+                            id="doorsCountWestBig"
+                            placeholder="W"
+                            value="0"
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="" id="doorsCountSmall">
+                    <td scope="row">
+                      <h6 class="h6">No. of Small Doors</h6>
+                      <div class="row">
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="doorsCountNorthSmall"
+                            class="form-label small mb-0 pe-2 text-truncate"
+                          >
+                            North doors
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="doorsCountNorthSmall"
+                            step="1"
+                            min="0"
+                            id="doorsCountNorthSmall"
+                            placeholder="N"
+                            value="2"
+                          />
+                        </div>
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="doorsCountSouthSmall"
+                            class="form-label small mb-0 pe-2 text-truncate"
+                          >
+                            South doors
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="doorsCountSouthSmall"
+                            step="1"
+                            min="0"
+                            id="doorsCountSouthSmall"
+                            placeholder="S"
+                            value="0"
+                          />
+                        </div>
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="doorsCountEastSmall"
+                            class="form-label small mb-0 pe-2 text-truncate"
+                          >
+                            East doors
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="doorsCountEastSmall"
+                            step="1"
+                            min="0"
+                            id="doorsCountEastSmall"
+                            placeholder="E"
+                            value="0"
+                          />
+                        </div>
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="doorsCountWestSmall"
+                            class="form-label small mb-0 pe-2 text-truncate"
+                          >
+                            West doors
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="doorsCountWestSmall"
+                            step="1"
+                            min="0"
+                            id="doorsCountWestSmall"
                             placeholder="W"
                             value="0"
                           />
@@ -976,40 +1076,80 @@
                     <td scope="row">
                       <h6 class="h6">Windows Measurements (m)</h6>
                       <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                           <div class="mb-3">
                             <label
-                              for="windowsLength"
+                              for="windowsLengthUpper"
                               class="form-label small mb-0"
-                              >Windows Length</label
+                              >Upper Windows Length</label
                             >
                             <input
                               type="number"
                               class="form-control"
-                              name="windowsLength"
+                              name="windowsLengthUpper"
                               step="0.01"
                               min="0"
-                              id="windowsLength"
+                              id="windowsLengthUpper"
                               aria-describedby=""
                               placeholder="Length"
                               value="2"
                             />
                           </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                           <div class="mb-3">
                             <label
-                              for="windowsWidth"
+                              for="windowsWidthUpper"
                               class="form-label small mb-0"
-                              >Windows Width</label
+                              >Upper Windows Width</label
                             >
                             <input
                               type="number"
                               class="form-control"
-                              name="windowsWidth"
+                              name="windowsWidthUpper"
                               step="0.01"
                               min="0"
-                              id="windowsWidth"
+                              id="windowsWidthUpper"
+                              aria-describedby=""
+                              placeholder="Width"
+                              value="1.5"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="mb-3">
+                            <label
+                              for="windowsLengthLower"
+                              class="form-label small mb-0"
+                              >Lower Windows Length</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="windowsLengthLower"
+                              step="0.01"
+                              min="0"
+                              id="windowsLengthLower"
+                              aria-describedby=""
+                              placeholder="Length"
+                              value="2"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="mb-3">
+                            <label
+                              for="windowsWidthLower"
+                              class="form-label small mb-0"
+                              >Lower Windows Width</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="windowsWidthLower"
+                              step="0.01"
+                              min="0"
+                              id="windowsWidthLower"
                               aria-describedby=""
                               placeholder="Width"
                               value="1.5"
@@ -1019,13 +1159,13 @@
                       </div>
                     </td>
                   </tr>
-                  <tr class="" id="windowsCount">
+                  <tr class="" id="windowsCountUpper">
                     <td scope="row">
-                      <h6 class="h6">No. of Windows</h6>
+                      <h6 class="h6">No. of Upper Windows</h6>
                       <div class="row">
                         <div class="col-6 col-sm-3 mb-3">
                           <label
-                            for="windowsCountNorth"
+                            for="windowsCountNorthUpper"
                             class="form-label small mb-0"
                           >
                             North Windows
@@ -1033,17 +1173,17 @@
                           <input
                             type="number"
                             class="form-control"
-                            name="windowsCountNorth"
+                            name="windowsCountNorthUpper"
                             step="1"
                             min="0"
-                            id="windowsCountNorth"
+                            id="windowsCountNorthUpper"
                             placeholder="N"
                             value="0"
                           />
                         </div>
                         <div class="col-6 col-sm-3 mb-3">
                           <label
-                            for="windowsCountSouth"
+                            for="windowsCountSouthUpper"
                             class="form-label small mb-0"
                           >
                             South Windows
@@ -1051,17 +1191,17 @@
                           <input
                             type="number"
                             class="form-control"
-                            name="windowsCountSouth"
+                            name="windowsCountSouthUpper"
                             step="1"
                             min="0"
-                            id="windowsCountSouth"
+                            id="windowsCountSouthUpper"
                             placeholder="S"
                             value="4"
                           />
                         </div>
                         <div class="col-6 col-sm-3 mb-3">
                           <label
-                            for="windowsCountEast"
+                            for="windowsCountEastUpper"
                             class="form-label small mb-0"
                           >
                             East Windows
@@ -1069,17 +1209,17 @@
                           <input
                             type="number"
                             class="form-control"
-                            name="windowsCountEast"
+                            name="windowsCountEastUpper"
                             step="1"
                             min="0"
-                            id="windowsCountEast"
+                            id="windowsCountEastUpper"
                             placeholder="E"
                             value="4"
                           />
                         </div>
                         <div class="col-6 col-sm-3 mb-3">
                           <label
-                            for="windowsCountWest"
+                            for="windowsCountWestUpper"
                             class="form-label small mb-0"
                           >
                             West Windows
@@ -1087,10 +1227,89 @@
                           <input
                             type="number"
                             class="form-control"
-                            name="windowsCountWest"
+                            name="windowsCountWestUpper"
                             step="1"
                             min="0"
-                            id="windowsCountWest"
+                            id="windowsCountWestUpper"
+                            placeholder="W"
+                            value="4"
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="" id="windowsCountLower">
+                    <td scope="row">
+                      <h6 class="h6">No. of Lower Windows</h6>
+                      <div class="row">
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="windowsCountNorthLower"
+                            class="form-label small mb-0"
+                          >
+                            North Windows
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="windowsCountNorthLower"
+                            step="1"
+                            min="0"
+                            id="windowsCountNorthLower"
+                            placeholder="N"
+                            value="0"
+                          />
+                        </div>
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="windowsCountSouthLower"
+                            class="form-label small mb-0"
+                          >
+                            South Windows
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="windowsCountSouthLower"
+                            step="1"
+                            min="0"
+                            id="windowsCountSouthLower"
+                            placeholder="S"
+                            value="4"
+                          />
+                        </div>
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="windowsCountEastLower"
+                            class="form-label small mb-0"
+                          >
+                            East Windows
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="windowsCountEastLower"
+                            step="1"
+                            min="0"
+                            id="windowsCountEastLower"
+                            placeholder="E"
+                            value="4"
+                          />
+                        </div>
+                        <div class="col-6 col-sm-3 mb-3">
+                          <label
+                            for="windowsCountWestLower"
+                            class="form-label small mb-0"
+                          >
+                            West Windows
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="windowsCountWestLower"
+                            step="1"
+                            min="0"
+                            id="windowsCountWestLower"
                             placeholder="W"
                             value="4"
                           />
