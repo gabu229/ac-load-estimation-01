@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Sensible Heat Gain Estimation</title>
+    <title>Group 1 - Load Estimation Project</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -66,13 +66,14 @@
           style="min-height: 80vh"
         >
           <div class="my-5">
-            <p class="text-muted py-0 my-0">AC required for room</p>
+            <p class="text-muted py-0 my-0 mb-5">AC required for room</p>
             <h1
               class="my-0 py-0 fw-bolder"
-              style="font-size: 10rem; line-height: 0.75em !important"
-              id="requiredConditioningCountDisplay"
+              style="font-size: 10rem; line-height: 0.3em !important"
+              id=""
             >
-              97
+              <span id="requiredConditioningCountDisplay">97</span>
+              <span class="sup" style="font-size: 3rem">units</span>
             </h1>
           </div>
 
@@ -145,9 +146,7 @@
                   <tr>
                     <th>Source</th>
                     <th>(U)</th>
-                    <th>
-                      A
-                    </th>
+                    <th>A</th>
                     <th>(t<sub>e</sub>) <sup>o</sup>C</th>
                     <th>W = U.A.t<sub>e</sub></th>
                   </tr>
@@ -610,11 +609,11 @@
                     <td scope="row">Outside Air</td>
                     <td id="sensibleHeatGainDueToOutsideAir">0</td>
                   </tr>
-                  <tr class="">
+                  <tr class="d-none">
                     <td scope="row">Equipments</td>
                     <td id="sensibleHeatGainDueToEquipments">0</td>
                   </tr>
-                  <tr class="">
+                  <tr class="d-none">
                     <td scope="row">
                       <b>Total</b>
                     </td>
@@ -652,11 +651,11 @@
                     <td scope="row">Occupants</td>
                     <td id="latentHeatGainDueToOccupants">0</td>
                   </tr>
-                  <tr class="">
+                  <tr class="d-none">
                     <td scope="row">Equipments</td>
                     <td id="latentHeatGainDueToEquipments">0</td>
                   </tr>
-                  <tr class="">
+                  <tr class="d-none">
                     <td scope="row">
                       <b>Total</b>
                     </td>
@@ -840,8 +839,8 @@
                             <label
                               for="doorLengthBig"
                               class="form-label small mb-0"
-                              >Big Door Length </label
-                            >
+                              >Big Door Length
+                            </label>
                             <input
                               type="number"
                               class="form-control"
@@ -857,9 +856,11 @@
                         </div>
                         <div class="col-md-3">
                           <div class="mb-3">
-                            <label for="doorWidthBig" class="form-label small mb-0"
-                              >Big Door Width </label
-                            >
+                            <label
+                              for="doorWidthBig"
+                              class="form-label small mb-0"
+                              >Big Door Width
+                            </label>
                             <input
                               type="number"
                               class="form-control"
@@ -895,7 +896,9 @@
                         </div>
                         <div class="col-md-3">
                           <div class="mb-3">
-                            <label for="doorWidthSmall" class="form-label small mb-0"
+                            <label
+                              for="doorWidthSmall"
+                              class="form-label small mb-0"
                               >Small Door Width</label
                             >
                             <input
